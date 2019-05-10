@@ -35,9 +35,10 @@
             // exitButton
             // 
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(217, 181);
+            this.exitButton.Location = new System.Drawing.Point(289, 223);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(175, 70);
+            this.exitButton.Size = new System.Drawing.Size(233, 86);
             this.exitButton.TabIndex = 0;
             this.exitButton.Text = "EXIT GAME";
             this.exitButton.UseVisualStyleBackColor = true;
@@ -46,9 +47,10 @@
             // resumeButton
             // 
             this.resumeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resumeButton.Location = new System.Drawing.Point(217, 80);
+            this.resumeButton.Location = new System.Drawing.Point(289, 98);
+            this.resumeButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.resumeButton.Name = "resumeButton";
-            this.resumeButton.Size = new System.Drawing.Size(175, 70);
+            this.resumeButton.Size = new System.Drawing.Size(233, 86);
             this.resumeButton.TabIndex = 1;
             this.resumeButton.Text = "RESUME GAME";
             this.resumeButton.UseVisualStyleBackColor = true;
@@ -56,15 +58,18 @@
             // 
             // PauseScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkRed;
-            this.ClientSize = new System.Drawing.Size(599, 346);
+            this.ClientSize = new System.Drawing.Size(799, 426);
             this.Controls.Add(this.resumeButton);
             this.Controls.Add(this.exitButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "PauseScreen";
             this.Text = "PauseScreen";
+            this.Load += new System.EventHandler(this.PauseScreen_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PauseScreen_KeyDown);
             this.ResumeLayout(false);
 
         }
