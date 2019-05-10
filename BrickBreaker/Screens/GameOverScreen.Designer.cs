@@ -38,9 +38,9 @@
             // 
             this.gameOverLabel.Font = new System.Drawing.Font("Tahoma", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameOverLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.gameOverLabel.Location = new System.Drawing.Point(662, 376);
+            this.gameOverLabel.Location = new System.Drawing.Point(543, 376);
             this.gameOverLabel.Name = "gameOverLabel";
-            this.gameOverLabel.Size = new System.Drawing.Size(1213, 276);
+            this.gameOverLabel.Size = new System.Drawing.Size(1616, 276);
             this.gameOverLabel.TabIndex = 0;
             // 
             // gameOverTimer

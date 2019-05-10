@@ -25,7 +25,7 @@ namespace BrickBreaker
         public static Paddle paddle;
         public static List<Ball> ballList = new List<Ball>();
         public static List<Ball> removeBalls = new List<Ball>();
-        public static int paddleWidth = 80;
+        public static int paddleWidth = 140;
         public static int paddleHeight = 20;
 
         // list of all currentlevel for current level
@@ -73,23 +73,13 @@ namespace BrickBreaker
         public string direction = "left";
 
         // font and brush for text
-        Font textFont;
+        Font textFont = new Font("Verdana", 20, FontStyle.Regular);
         SolidBrush sb = new SolidBrush(Color.White);
 
         // level variables
         List<XmlReader> levelList = new List<XmlReader>();
         int currentlevelnum = 1;
         bool levelLoadstart = true;
-
-        // list for block sides
-        List<Rectangle> leftside = new List<Rectangle>();
-        List<Rectangle> rightside = new List<Rectangle>();
-
-        // list for block corners
-        List<Rectangle> upLeft = new List<Rectangle>();
-        List<Rectangle> upRight = new List<Rectangle>();
-        List<Rectangle> bottomLeft = new List<Rectangle>();
-        List<Rectangle> bottomRight = new List<Rectangle>();
 
         public GameScreen(bool multiplayer = false)
         {
@@ -154,8 +144,6 @@ namespace BrickBreaker
 
             powerup.Clear();
             currentlevel.Clear();
-            leftside.Clear();
-            rightside.Clear();
             while (reader.Read())
             {
                 string X, Y, HP;
@@ -169,17 +157,6 @@ namespace BrickBreaker
             currentlevel.RemoveAt(currentlevel.Count - 1);
             reader.Close();
             Refresh();
-
-            foreach(Block block in currentlevel)
-            {
-                leftside.Add(new Rectangle(block.x, block.y, 1, block.height));
-                rightside.Add(new Rectangle(new Rectangle(block.x, block.y, block.width, block.height).Right, block.y, 1, block.height));
-
-                upLeft.Add(new Rectangle(block.x, block.y, 1, 1));
-                upRight.Add(new Rectangle(block.x + block.width, block.y, 1, 1));
-                bottomLeft.Add(new Rectangle(block.x, block.y + block.height, 1, 1));
-                bottomRight.Add(new Rectangle(block.x + block.width, block.y + block.height, 1, 1));
-            }
         }
 
 
@@ -192,9 +169,6 @@ namespace BrickBreaker
 
             // reset score
             score = 0;
-
-            // create text graphics
-            textFont = new Font("Verdana", 20, FontStyle.Regular);
 
             // setup starting paddle values and create paddle object
             int paddleX = ((this.Width / 2) - (paddleWidth / 2));
@@ -352,7 +326,9 @@ namespace BrickBreaker
                     b.WallCollision(this);
 
                     // Check for ball hitting bottom of screen and if there is only one ball
-                    if (b.BottomCollision(this, paddle) && ballList.Count == 1)
+                    Rectangle curball = new Rectangle(Convert.ToInt32(b.x), Convert.ToInt32(b.y), b.size, b.size);
+
+                    if((b.BottomCollision(this, paddle) && ballList.Count == 1)|| (curball.IntersectsWith(new Rectangle(0, paddle.y + 9, this.Width, 10))))
                     {
                         // decrease player 1 lives
                         player1Lives--;
@@ -420,38 +396,22 @@ namespace BrickBreaker
                 }
             }
 
-            foreach (Ball ball in ballList)
-            {
-                for (int i = 0; i < currentlevel.Count(); i++)
-                {
-                    Block b = currentlevel[i];
-                    Rectangle ls = leftside[i];
-                    Rectangle rs = rightside[i];
-
-                    Rectangle curball = new Rectangle(Convert.ToInt32(ball.x), Convert.ToInt32(ball.y), ball.size, ball.size);
-                    if(curball.IntersectsWith(upLeft[i])|| curball.IntersectsWith(upRight[i]) || curball.IntersectsWith(bottomLeft[i]) || curball.IntersectsWith(bottomRight[i]))
-                    {
-                        ball.Yangle *= -1;
-                    }
-                    if (ball.BlockCollision(b))
-                    {
-                        if (ball.side_collision(ls) || ball.side_collision(rs))
-                        {
-                            ball.xSpeed *= -1;
-                        }
-                        leftside.RemoveAt(i);
-                        rightside.RemoveAt(i);
-                    }
-                }
-            }
-
             // Check if ball has collided with any currentlevel
-            foreach (Ball ba in ballList)
+            //foreach (Ball ba in ballList)
+            for(int i = 0; i < ballList.Count(); i++)
             {
-                ba.Move();
+                ballList[i].Move();
                 foreach (Block b in currentlevel)
                 {
-                    if (ba.BlockCollision(b))
+                    Rectangle curball = new Rectangle(Convert.ToInt32(ballList[i].x), Convert.ToInt32(ballList[i].y), ballList[i].size, ballList[i].size);
+
+                    if (ballList[i].side_collision(b.leftSide) || ballList[i].side_collision(b.rightSide))
+                    {
+                        ballList[i].xSpeed *= -1;
+                    }
+                    
+
+                    if (ballList[i].BlockCollision(b))
                     {
                         b.hp--;
                         if (b.hp < 1)
@@ -591,11 +551,8 @@ namespace BrickBreaker
                             y = randGen.Next(1, 301);
 
                             //activate powerup
-                            Ball b2 = new Ball(x, y, xSpeed, ySpeed, ballSize, 1, -1);
-                            ballList.Add(b2);
-
-                            Ball b3 = new Ball(y, x, xSpeed, ySpeed, ballSize, 1, -1);
-                            ballList.Add(b3);
+                            ballList.Add(new Ball(x, y, xSpeed, ySpeed, ballSize, 1, -1));
+                            ballList.Add(new Ball(y, x, xSpeed, ySpeed, ballSize, 1, -1));
 
                             break;
                         }
@@ -605,24 +562,29 @@ namespace BrickBreaker
                         }
                         else if (p.type == "l")
                         {
-                            paddle.width -= 25;
+                            if(paddle.width > 25)
+                            {
+                                paddle.width -= 25;
+                            }
+                            else
+                            {
+                                paddle.width /= 2;
+                            }
+
                         }
                         else if (p.type == "BS")
                         {
-                            ySpeed -= 2;
-
                             foreach (Ball b in ballList)
                             {
-                                b.ySpeed = ySpeed;
+                                b.ySpeed -= 2;
+                                // If the ball gets way too slow at anglepositions of 1 & 6, the ball can get stuck at the top
                             }
                         }
                         else if (p.type == "bs")
                         {
-                            ySpeed += 2;
-
                             foreach (Ball b in ballList)
                             {
-                                b.ySpeed = ySpeed;
+                                b.ySpeed += 2;
                             }
                         }
 

@@ -17,9 +17,6 @@ namespace BrickBreaker
         {
             InitializeComponent();
 
-            loadScoresRK();
-            //compare the scores
-
             //Sorting the code
             Form1.highScores.Sort(delegate (HighScore x, HighScore y)
             {
@@ -48,28 +45,7 @@ namespace BrickBreaker
             }
         }
 
-        public void loadScoresRK()
-        {
-            //creating Xml reader file 
-            XmlReader reader = XmlReader.Create("Resources/HighScores.xml", null);
-            string newScoreString;
-
-            //basically highScore1String is going to be highScore #1...and on...etc
-            //plan: "highScores" should only contain 5 high "scores"
-
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.Text)
-                {
-                    newScoreString = reader.ReadString();
-
-                    HighScore newScore = new HighScore(newScoreString);
-                    Form1.highScores.Add(newScore);
-                }
-            }
-
-            reader.Close();
-        }
+        
 
         private void continueButton_Click(object sender, EventArgs e)
         {

@@ -38,9 +38,9 @@
             // 
             this.winnerLabel.Font = new System.Drawing.Font("Tahoma", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.winnerLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.winnerLabel.Location = new System.Drawing.Point(817, 291);
+            this.winnerLabel.Location = new System.Drawing.Point(696, 291);
             this.winnerLabel.Name = "winnerLabel";
-            this.winnerLabel.Size = new System.Drawing.Size(1384, 306);
+            this.winnerLabel.Size = new System.Drawing.Size(1563, 306);
             this.winnerLabel.TabIndex = 0;
             // 
             // winnerTimer

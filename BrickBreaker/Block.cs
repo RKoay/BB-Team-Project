@@ -16,7 +16,10 @@ namespace BrickBreaker
         public int y; 
         public int hp;
         public int score; // TODO: Have bricks in a designed level have more points or less
-        
+
+        public Rectangle leftSide;
+        public Rectangle rightSide;
+
         /// <summary>
         /// Gets the color based on the hp
         /// </summary>
@@ -43,6 +46,9 @@ namespace BrickBreaker
             x = Convert.ToInt32(_x);
             y = Convert.ToInt32(_y);
             hp = Convert.ToInt32(_hp);
+
+            leftSide = new Rectangle(x, y, 1, height);
+            rightSide = new Rectangle(x + width, y, 1, height);
         }
     }
 }

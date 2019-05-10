@@ -188,19 +188,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\negitive.jpg" />
+    <EmbeddedResource Include="Resources\Titles\negitive.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\startScreenBG.jpg" />
+    <EmbeddedResource Include="Resources\Screens\startScreenBG.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\pressAnyButton.jpg" />
+    <EmbeddedResource Include="Resources\Titles\pressAnyButton.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\brickWall.jpg" />
+    <EmbeddedResource Include="Resources\Objects\brickWall.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\life.png" />
+    <EmbeddedResource Include="Resources\Objects\life.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WMPLib">
@@ -212,6 +212,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Break\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\life.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

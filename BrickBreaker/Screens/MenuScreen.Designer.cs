@@ -47,9 +47,9 @@
             this.titleLabel.Location = new System.Drawing.Point(722, 0);
             this.titleLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(1138, 217);
+            this.titleLabel.Size = new System.Drawing.Size(1189, 217);
             this.titleLabel.TabIndex = 0;
-            this.titleLabel.Text = "MAINMENU";
+            this.titleLabel.Text = "MAIN MENU";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // playLabel
@@ -85,7 +85,6 @@
             // 
             // exitLabel
             // 
-            this.exitLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.exitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.exitLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -96,11 +95,9 @@
             this.exitLabel.TabIndex = 3;
             this.exitLabel.Text = "Exit";
             this.exitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.exitLabel.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // brickWallPic
             // 
-            this.brickWallPic.Image = global::BrickBreaker.Properties.Resources.brickWall;
             this.brickWallPic.Location = new System.Drawing.Point(38, 0);
             this.brickWallPic.Margin = new System.Windows.Forms.Padding(6);
             this.brickWallPic.Name = "brickWallPic";
@@ -116,6 +113,7 @@
             this.scoreLabel.Name = "scoreLabel";
             this.scoreLabel.Size = new System.Drawing.Size(500, 899);
             this.scoreLabel.TabIndex = 5;
+            this.scoreLabel.Visible = false;
             // 
             // highScores
             // 
@@ -160,8 +158,10 @@
         private System.Windows.Forms.Label playLabel;
         private System.Windows.Forms.Label highscoreLabel;
         private System.Windows.Forms.Label exitLabel;
+        private System.Windows.Forms.Timer menuTimer;
         private System.Windows.Forms.PictureBox brickWallPic;
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.Label highScores;
+
     }
 }

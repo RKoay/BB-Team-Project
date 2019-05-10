@@ -17,7 +17,7 @@ namespace BrickBreaker
         public StartScreen()
         {
             InitializeComponent();
-            startTimer.Enabled = true;
+            //startTimer.Enabled = true;
 
         }
         private void StartScreen_KeyDown(object sender, KeyEventArgs e)
