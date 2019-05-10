@@ -17,8 +17,9 @@ namespace BrickBreaker
         public StartScreen()
         {
             InitializeComponent();
-            //startTimer.Enabled = true;
-
+            startTimer.Enabled = true;
+            Intro.Size = Size;
+            Intro.Location = new Point(0, 0);
         }
         private void StartScreen_KeyDown(object sender, KeyEventArgs e)
         {
@@ -28,18 +29,22 @@ namespace BrickBreaker
             form.ChangeScreen(this, ms);
         }
 
+        bool switched = false;
         private void StartTimer_Tick(object sender, EventArgs e)
         {
-            if (i % 2 == 0)
+            switched = !switched;
+
+            switch(switched)
             {
-                anyButtonPB.Image = new Bitmap(Properties.Resources.negitive);
+                case false:
+                    BackColor = Color.Black;
+                    ForeColor = Color.White;
+                    break;
+                case true:
+                    BackColor = Color.White;
+                    ForeColor = Color.Black;
+                    break;
             }
-            else
-            {
-                anyButtonPB.Image = new Bitmap(Properties.Resources.pressAnyButton);
-            }
-            i++;
-            Refresh();
         }
     }
 }

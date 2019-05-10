@@ -30,7 +30,7 @@ namespace BrickBreaker
         //testing
         
         private static int index = 0;
-        private List<Label> labels = new List<Label>();
+        private List<Button> buttons = new List<Button>();
         public MenuScreen()
         {
             InitializeComponent();
@@ -54,32 +54,9 @@ namespace BrickBreaker
 
             //Adding Labels to Label list for easy management
             //
-            labels.Add(titleLabel);
-            //labels.Add(playLabel);
-            labels.Add(exitLabel);
-        }
-
-        public static void ChangeScreen(UserControl current, string next)
-        {
-            //f is set to the form that the current control is on
-            Form f = current.FindForm();
-            f.Controls.Remove(current);
-            UserControl ns = null;
-
-            ///If any screens, (UserControls), are added to the program they need to
-            ///be added within this switch block as well.
-            switch (next)
-            {
-                case "MenuScreen":
-                    ns = new MenuScreen();
-                    break;
-                case "GameScreen":
-                    ns = new GameScreen();
-                    break;
-            }
-            ns.Location = new Point((f.Width - ns.Width) / 2, (f.Height - ns.Height) / 2);
-            f.Controls.Add(ns);
-            ns.Focus();
+            buttons.Add(_playButton);
+            buttons.Add(_highScoreButton);
+            buttons.Add(_exitButton);
         }
 
         /// <summary>
@@ -87,8 +64,8 @@ namespace BrickBreaker
         /// </summary>
         private void gainFocus(object sender, EventArgs e)
         {
-            var label = sender as Label;
-            label.ForeColor = Color.Red;
+            var button = sender as Button;
+            button.ForeColor = Color.Red;
         }
 
         /// <summary>
@@ -97,17 +74,7 @@ namespace BrickBreaker
         private void lostFocus(object sender, EventArgs e)
         {
             var button = sender as Button;
-            button.ForeColor = Color.Black;
-        }
-
-        /// <summary>
-        /// The event code for when the exist button is pressed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void exitButton_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            button.ForeColor = Color.White;
         }
 
         /// <summary>
@@ -129,13 +96,14 @@ namespace BrickBreaker
         /// <param name="e"></param>
         private void MenuScreen_Load(object sender, EventArgs e)
         {
-            var ratio = 6;
-            for (int i = 0; i < labels.Count; i++)
+            Form1.CenterButtons(this, 75);
+
+            foreach(var button in buttons)
             {
-                labels[i].Size = new Size(Width / ratio + 125, Height / ratio);
-                var space = (Height /4) - labels[i].Height + (100 * i);
-                labels[i].Location = new Point((Width / 2) - (labels[i].Width / 2), space);
+                button.GotFocus += gainFocus;
+                button.LostFocus += lostFocus;
             }
+            buttons[0].Focus();
         }
 
         /// <summary>
@@ -153,6 +121,8 @@ namespace BrickBreaker
                 case Keys.Down:
                     _newButton(1).Focus();
                     break;
+                default:
+                    break;
             }
         }
 
@@ -161,28 +131,28 @@ namespace BrickBreaker
         /// </summary>
         /// <param name="changeInIndex"></param>
         /// <returns></returns>
-        private Label _newButton(int changeInIndex)
+        private Button _newButton(int changeInIndex)
         {
             //Thayen
             index += changeInIndex;
             //If the button is out of range set the button within range
             if (index < 0)
                 index = 0;
-            else if (index >= labels.Count)
-                index = labels.Count - 1;
-            return labels[index];
-
+            else if (index >= buttons.Count)
+                index = buttons.Count - 1;
+            return buttons[index];
         }
 
-        private void highScores_Click(object sender, EventArgs e)
+
+        private void _exitButton_Click(object sender, EventArgs e)
         {
-            HighScoreScreen hs = new HighScoreScreen();
-            Form form = this.FindForm();
+            Application.Exit();
+        }
 
-            form.Controls.Add(hs);
-            form.Controls.Remove(this);
-
-            hs.Location = new Point((form.Width - hs.Width) / 2, (form.Height - hs.Height) / 2);
+        private void _highScoreButton_Click(object sender, EventArgs e)
+        {
+            Form1 form = FindForm() as Form1;
+            form.ChangeScreen(this, new HighScoreScreen());
         }
     }
 }

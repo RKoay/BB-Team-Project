@@ -71,6 +71,44 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;TheScores&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        ///  &lt;TheScore&gt;
+        ///    &lt;Score&gt;0&lt;/Score&gt;
+        ///  &lt;/TheScore&gt;
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string HighScores {
+            get {
+                return ResourceManager.GetString("HighScores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Tandysoft {

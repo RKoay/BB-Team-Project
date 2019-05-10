@@ -22,7 +22,7 @@ namespace BrickBreaker
         // TODO: Work on block collision
 
         // Paddle and Ball objects
-        public static Paddle paddle;
+        public static Paddle paddle = new Paddle(0, 0, 0, 0, 0, Color.Black);
         public static List<Ball> ballList = new List<Ball>();
         public static List<Ball> removeBalls = new List<Ball>();
         public static int paddleWidth = 140;
@@ -200,7 +200,8 @@ namespace BrickBreaker
                 }
                 else if (result == DialogResult.Abort)
                 {
-                    MenuScreen.ChangeScreen(this, "MenuScreen");
+                    Form1 form = FindForm() as Form1;
+                    form.ChangeScreen(this, new MenuScreen());
                 }
             }
 
