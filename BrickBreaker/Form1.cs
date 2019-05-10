@@ -100,6 +100,7 @@ namespace BrickBreaker
             add.Location = new Point(Width / 6, Height / 6);
             add.BackColor = Color.Black;
             Controls.Add(add);
+            add.Focus();
 
         }
 
