@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace BrickBreaker
 {
+    /// <summary>
+    /// Ball for Brick Breaker
+    /// </summary>
     public class Ball
     {
         public int xSpeed, ySpeed, size;

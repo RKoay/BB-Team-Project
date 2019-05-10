@@ -56,15 +56,6 @@
             this.life5Output.Size = new System.Drawing.Size(33, 33);
             this.life5Output.TabIndex = 0;
             // 
-            // spacer
-            // 
-            this.spacer.BackColor = System.Drawing.Color.White;
-            this.spacer.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.spacer.Location = new System.Drawing.Point(1175, 0);
-            this.spacer.Name = "spacer";
-            this.spacer.Size = new System.Drawing.Size(25, 75);
-            this.spacer.TabIndex = 1;
-            // 
             // life1Output
             // 
             this.life1Output.BackColor = System.Drawing.Color.Transparent;

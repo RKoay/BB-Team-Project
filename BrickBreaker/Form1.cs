@@ -57,18 +57,6 @@ namespace BrickBreaker
         }
 
         /// <summary>
-        /// Sets the screen height and sizes
-        /// </summary>
-        /// <param name="c"></param>
-        [Obsolete("TODO Game Screen scales incorrectly")]
-        public void ConfigScreen(ref UserControl c)
-        {
-            c.Width = (Width / 3) * 2;
-            c.Height = (Height / 3) * 2;
-            c.Location = new Point(Width / 2 - c.Width /2, Height / 2  - c.Height /2);
-        }
-
-        /// <summary>
         /// Gets a .wav file from the file path and plays it
         /// </summary>
         /// <param name="filePath"></param>
@@ -106,12 +94,24 @@ namespace BrickBreaker
         /// <param name="add"></param>
         public void ChangeScreen(UserControl remove, UserControl add)
         {
-            ConfigScreen(ref add);
-            Controls.Add(add);
-            Controls.Remove(remove);
             if(remove != null)
+            {
+                Controls.Remove(remove);
                 remove.Dispose();
+            }
+            add.Size = new Size(Width / 3 * 2, Height / 3 * 2);
+            add.Location = new Point(Width / 6, Height / 6);
+            Controls.Add(add);
+        }
 
+        public static void CenterButtons(UserControl userControl, int startSpace = 0, int spaceBetween = 50)
+        {
+            int lastHeight = startSpace + spaceBetween;
+            foreach (var Control in userControl.Controls.OfType<Button>())
+            {
+                Control.Location = new Point(userControl.Width / 2 - Control.Width / 2, lastHeight);
+                lastHeight += spaceBetween + Control.Height;
+            }
         }
 
         /// <summary>
